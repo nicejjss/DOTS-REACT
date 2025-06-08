@@ -1,0 +1,74 @@
+#menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 25vh;
+}
+
+.cicrle {
+    border-radius: 100%;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+}
+
+#circle-1 {
+    background-color: red;
+    transform: translate(-50%, -50%);
+}
+
+#circle-2 {
+    background-color: blue;
+    right: 0;
+    transform: translate(50%, 0);
+    width: 500px;
+    height: 500px;
+}
+
+#circle-3 {
+    background-color: green;
+    transform: translate(-50%, 50%);
+    width: 1000px;
+    height: 1000px;
+}
+
+#circle-4 {
+    background-color: yellow;
+    right: 100px;
+    bottom: 100px;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+}
+
+#circle-5 {
+    background-color: purple;
+    transform: translate(100%, -50%);
+    width: 400px;
+    height: 400px;
+}
+
+#game-title {
+    font-size: 60px !important;
+    font-weight: 900;
+    flex-wrap: nowrap;
+}
+
+.input-text {
+    outline: none;
+    border: 1px black solid;
+    background-color: white;
+    padding: 5px 10px;
+}
+
+#btn-start {
+    outline: none;
+    cursor: pointer;
+    padding: 10px 35px;
+}
+
+.stroke {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
