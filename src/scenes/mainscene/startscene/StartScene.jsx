@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import Setting from "../../../components/setting/Setting"
 import GameTitle from "./GameTitle/GameTitle"
-import { setGamePlay } from "../../../redux/store/gamestate/GameState"
+import { setGamePlay } from "../../../redux/store/GameState"
 import './StartScene.css'
 
 const StartScene = () => {

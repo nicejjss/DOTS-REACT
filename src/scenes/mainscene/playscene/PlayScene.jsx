@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { setGameStart } from "../../../redux/store/gamestate/GameState"
+import { setGameStart } from "../../../redux/store/GameState"
 
 const PlayScene = () => {
     const dispatch = useDispatch();

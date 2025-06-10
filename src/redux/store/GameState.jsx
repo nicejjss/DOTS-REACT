@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GameState } from '../../../constants/GameState'
+import { GameState } from '../../constants/GameState'
 
 const gameStateSlice = createSlice({
     name: 'gameState',
