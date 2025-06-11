@@ -35,9 +35,6 @@ class Music {
 
     changeVolume(volume) {
         this.music.volume = volume;
-        if (this.music.paused === true) {
-            this.music.play();
-        }
     }
 
     autoPlay(autoplay = false) {

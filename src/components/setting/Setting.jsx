@@ -1,14 +1,29 @@
 import './Setting.css'
-import { backgroundMusicIntance } from '../../controller/Audio/BackgroundMusic.jsx'
+import { backgroundMusicIntance } from '../../controller/Music/BackgroundMusic.jsx'
 import { useSelector, useDispatch } from 'react-redux'
-import { setVolume } from '../../redux/store/BackgroundMusic.jsx'
+import {
+  setBackgroundMusicVolume,
+  setDotSoundVolume
+} from '../../redux/store/GameManager.jsx'
+import { useEffect } from 'react';
+import { Dot } from '../../controller/Music/Dot.jsx';
+import { createAndPlay } from '../../utils/Music/music.jsx';
 
 
 const handlePlay = () => backgroundMusicIntance.play();
 
 const Setting = () => {
-    const backgroundMusicVolumn = useSelector(state => state.backgroundMusicVolumn.value);
+    const backgroundMusicVolumn = useSelector(state => state.gameManager.backgroundMusicVolume);
+    const dotSoundVolume = useSelector(state => state.gameManager.dotSoundVolume);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        backgroundMusicIntance.changeVolume(backgroundMusicVolumn);
+    }, [backgroundMusicVolumn]);
+
+    useEffect(() => {
+        createAndPlay(new Dot(), dotSoundVolume);
+    }, [dotSoundVolume]);
 
     return (
         <div>
@@ -19,9 +34,9 @@ const Setting = () => {
                     min="0"
                     max="1"
                     step="0.01"
-                    value={backgroundMusicVolumn}
+                    defaultValue={backgroundMusicVolumn}
                     onInput={(e) => {
-                        dispatch(setVolume(e.target.value));
+                        dispatch(setBackgroundMusicVolume(e.target.value));
                         handlePlay();
                     }}
                     className="input"
@@ -35,7 +50,10 @@ const Setting = () => {
                     min="0"
                     max="1"
                     step="0.01"
-                    defaultValue="0"
+                    defaultValue={dotSoundVolume}
+                    onMouseUp={(e) => {
+                        dispatch(setDotSoundVolume(e.target.value));
+                    }}
                     className="input" name="" id="dot-sound" />
             </div>
         </div>

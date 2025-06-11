@@ -7,7 +7,7 @@ class BackgroundMusic extends Music {
     static instance;
     constructor() {
         super(backgroundMusic['name'], backgroundMusic['src']);
-        this.music.loop = true; // Loop the background music
+        this.music.loop = true;
     }
 
     static getInstance() {

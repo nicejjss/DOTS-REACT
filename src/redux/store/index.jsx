@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import gameStateReducer from './GameState'
-import backgroundMusicReducer from './BackgroundMusic' // Uncomment if you have a background music reducer
+import gameManagerReducer from './GameManager'
 
 const store = configureStore({
     reducer: {
         gameState: gameStateReducer,
-        backgroundMusicVolumn: backgroundMusicReducer, // Uncomment if you have a background music reducer
+        gameManager: gameManagerReducer
     }
 })
 
