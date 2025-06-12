@@ -10,6 +10,9 @@ const gameStateSlice = createSlice({
         setGameStart: (state) => {
             state.value = GameState.START
         },
+        setGameReady: (state) => {
+            state.value = GameState.READY
+        },
         setGamePlay: (state) => {
             state.value = GameState.PLAY
         },
@@ -25,6 +28,6 @@ const gameStateSlice = createSlice({
     }
   })
 
-  export const { setGameStart, setGamePlay } = gameStateSlice.actions
+  export const { setGameStart, setGameReady, setGamePlay, setGamePause, setGameOver} = gameStateSlice.actions
 
   export default gameStateSlice.reducer

@@ -16,6 +16,7 @@ const Setting = () => {
     const backgroundMusicVolumn = useSelector(state => state.gameManager.backgroundMusicVolume);
     const dotSoundVolume = useSelector(state => state.gameManager.dotSoundVolume);
     const dispatch = useDispatch();
+    console.log(backgroundMusicVolumn, dotSoundVolume);
     
     useEffect(() => {
         backgroundMusicIntance.changeVolume(backgroundMusicVolumn);

@@ -4,11 +4,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   backgroundMusicVolume:  0,
   victoryVolume: 0.4,
-  dotSoundVolume: 0,
+  dotSoundVolume: 0.4,
   dots: 0,
   currentDots: 0,
   sec: 0,
-  miliSec: 0
+  miliSec: 0,
+  currentSec: 0,
+  currentMiliSec: 0
 };
 
 const gameManagerSlice = createSlice({
@@ -35,6 +37,18 @@ const gameManagerSlice = createSlice({
     },
     setMiliSec: (state, action) => {
       state.miliSec = action.payload;
+    },
+    addSec(state) {
+      state.sec += 1;
+    },
+    addMiliSec(state) {
+      state.miliSec += 1;
+    },
+    setCurrentSec: (state, action) => {
+      state.currentSec = action.payload;
+    },
+    setCurrentMiliSec: (state, action) => {
+      state.currentMiliSec = action.payload;
     }
   }
 });
@@ -46,6 +60,10 @@ export const {
   setDots,
   setCurrentDots,
   setSec,
-  setMiliSec
+  setMiliSec,
+  addSec,
+  addMiliSec,
+  setCurrentSec,
+  setCurrentMiliSec
 } = gameManagerSlice.actions;
 export default gameManagerSlice.reducer;

@@ -1,0 +1,25 @@
+#header-list {
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.header-item {
+    /* flex: 1 1 0px; */
+    text-align: center;
+    font-size: 25px;
+}
+
+#pause-btn {
+    cursor: pointer;
+}
+
+#dot-zone {
+    height: 95vh;
+    padding: 40px;
+}
+
+#dot {
+    cursor: pointer;
+    border-radius:  50%;
+    position: absolute;
+}

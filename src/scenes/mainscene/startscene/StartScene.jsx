@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import Setting from "../../../components/setting/Setting"
 import GameTitle from "./GameTitle/GameTitle"
-import { setGamePlay } from "../../../redux/store/GameState"
+import { setGameReady } from "../../../redux/store/GameState"
 import './StartScene.css'
 import {
-    setCurrentDots
+    setCurrentDots,
+    setCurrentSec,
+    setCurrentMiliSec
 } from '../../../redux/store/GameManager'
 import { useRef, useEffect, useState } from "react"
 
@@ -27,7 +29,9 @@ const StartScene = () => {
         }
 
         handleDotInput();
-        dispatch(setGamePlay());
+        dispatch(setCurrentSec(0));
+        dispatch(setCurrentMiliSec(0));
+        dispatch(setGameReady());
     }
 
     useEffect(() => {

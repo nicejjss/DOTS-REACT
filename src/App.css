@@ -1,30 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+#child-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
 }
 
 .flex-collumn {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .flex-row {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .justify-content-space-between {
-  justify-content: space-between;
+    justify-content: space-between;
 }
 
 .justify-content-space-around {
-  justify-content: space-around;
+    justify-content: space-around;
 }
 
 .justify-content-center {
-  justify-content: center;
+    justify-content: center;
+}
+
+.stroke {
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.position-absolute-right-bottom-screen {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.position-absolute-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.stack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.max-width-500 {
+    max-width: 500px;
+}
+
+.btn {
+    outline: none;
+    cursor: pointer;
+    padding: 10px 35px;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-align-left {
+    text-align: left;
 }
