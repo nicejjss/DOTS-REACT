@@ -8,12 +8,19 @@ const gameStateSlice = createSlice({
     },
     reducers: {
         setGameStart: (state) => {
-            console.log(state.value);
             state.value = GameState.START
         },
         setGamePlay: (state) => {
-            console.log(state.value);
             state.value = GameState.PLAY
+        },
+        setGamePause: (state) => {
+            state.value = GameState.PAUSE
+        },
+        setGameResume: (state) => {
+            state.value = GameState.RESUME
+        },
+        setGameOver: (state) => {
+            state.value = GameState.OVER
         },
     }
   })

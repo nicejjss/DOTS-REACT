@@ -7,7 +7,7 @@
     height: 25vh;
 }
 
-.cicrle {
+.circle {
     border-radius: 100%;
     position: absolute;
     width: 300px;
@@ -71,4 +71,12 @@
 
 .stroke {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }
