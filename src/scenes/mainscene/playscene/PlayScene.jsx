@@ -1,50 +1,81 @@
-import { useDispatch, useSelector } from "react-redux"
-import { setGamePause, setGameStart } from "../../../redux/store/GameState"
 import './PlayScene.css'
-import { useState, useEffect } from "react";
-import { GameState } from "../../../constants/GameState";
-import { addSec, addMiliSec, setMiliSec } from "../../../redux/store/GameManager";
+import HeadsUp from "./headsup/HeadsUp";
+import Dot from "./Dot/Dot";
+import { createAndPlay } from '../../../utils/Music/music';
+import { Dot as DotSound } from '../../../controller/Music/Dot';
+import { Victory } from '../../../controller/Music/Victory';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import {
+  setDots,
+  setSec, setMiliSec
+} from '../../../redux/store/GameManager'
+import { setGameOver } from '../../../redux/store/GameState';
+import { calculateDotSpeed } from '../../../utils/Dot/dot'
+import { store } from '../../../redux/store/index';
 
 const PlayScene = () => {
-    const [currentDots, setCurrentDots] = useState(useSelector(state => state.gameManager.currentDots));
-    const sec = useSelector(state => state.gameManager.sec);
-    const miliSec = useSelector(state => state.gameManager.miliSec);
-    const dispatch = useDispatch();
-    const gameState = useSelector(state => state.gameState.value);
+  const dispatch = useDispatch();
 
-    // Start timer on mount
-  useEffect(() => {
-    if (gameState !== GameState.PLAY) return; // Only start timer if game is in PLAY state
-    const interval = setInterval(() => {
-      dispatch(addMiliSec());
-    }, 10); // Every 10ms
+  // Only use local state for UI-specific values
+  const [curtDots, setCurDots] = useState(store.getState().gameManager.currentDots);
 
-    return () => clearInterval(interval); // Clear on unmount
-  }, [gameState]);
+  // Only useSelector for values you want to trigger re-render (if any)
+  // const dotSoundVolume = useSelector(state => state.gameManager.dotSoundVolume);
 
-  // Watch miliSec and update sec when needed
-  useEffect(() => {
-    if (gameState !== GameState.PLAY) return; // Only update sec if game is in PLAY state
-    if (miliSec >= 100) {
-      dispatch(addSec());
-      dispatch(setMiliSec(0));
-    }
-  }, [miliSec, gameState]);
+  const dotClicked = () => {
+    const state = store.getState();
+    const dotSoundVolume = state.gameManager.dotSoundVolume;
 
-    return (
-        <div>
-            <div id="play" className="position-absolute-screen">
-                <ul id="header-list" className="justify-content-space-around flex-row list-style-none">
-                    <li className="header-item" id="dot-number">Dots: {currentDots}</li>
-                    <li className="header-item" id="time">
-                        <span id="time-second">{sec}</span>:<span id="time-milisecond">{miliSec.toString().padStart(2, '0')}</span></li>
-                    <li onClick={() => dispatch(setGamePause())} className="header-item" id="pause-btn">Pause</li>
-                </ul>
-                <div id="dot-zone"></div>
-            </div>
-            <button onClick={() => dispatch(setGameStart())}>Play</button>
+    createAndPlay(new DotSound(), dotSoundVolume);
+    setCurDots(prevDots => {
+      const newDots = prevDots - 1;
+      if (newDots <= 0) {
+
+        // Get latest values from Redux store directly
+        const victoryVolume = state.gameManager.victoryVolume;
+        const currentDots = state.gameManager.currentDots;
+        const currentSec = state.gameManager.currentSec;
+        const currentMiliSec = state.gameManager.currentMiliSec;
+        const dots = state.gameManager.dots;
+        const sec = state.gameManager.sec;
+        const miliSec = state.gameManager.miliSec;
+
+        const currentSpeed = calculateDotSpeed(
+          currentDots,
+          currentSec,
+          currentMiliSec
+        );
+
+        const savedSpeed = calculateDotSpeed(
+          dots,
+          sec,
+          miliSec
+        );
+
+        if (savedSpeed === 0 || (currentSpeed > savedSpeed)) {
+          dispatch(setDots(currentDots));
+          dispatch(setSec(currentSec));
+          dispatch(setMiliSec(currentMiliSec));
+        }
+
+        createAndPlay(new Victory(), victoryVolume);
+        dispatch(setGameOver());
+      }
+      return newDots;
+    });
+  }
+
+  return (
+    <div>
+      <div id="play" className="position-absolute-screen">
+        <HeadsUp currentDots={curtDots} />
+        <div id="dot-zone">
+          <Dot dotClicked={dotClicked} />
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default PlayScene

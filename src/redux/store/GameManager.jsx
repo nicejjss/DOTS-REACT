@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // musicSlice.js (using Redux Toolkit)
 const initialState = {
   backgroundMusicVolume:  0,
-  victoryVolume: 0.4,
+  victoryVolume: 0.3,
   dotSoundVolume: 0.4,
   dots: 0,
   currentDots: 0,
@@ -49,7 +49,13 @@ const gameManagerSlice = createSlice({
     },
     setCurrentMiliSec: (state, action) => {
       state.currentMiliSec = action.payload;
-    }
+    },
+    addCurrentSec(state) {
+      state.currentSec += 1;
+    },
+    addCurrentMiliSec(state) {
+      state.currentMiliSec += 1;
+    },
   }
 });
 
@@ -64,6 +70,8 @@ export const {
   addSec,
   addMiliSec,
   setCurrentSec,
-  setCurrentMiliSec
+  setCurrentMiliSec,
+  addCurrentSec,
+  addCurrentMiliSec
 } = gameManagerSlice.actions;
 export default gameManagerSlice.reducer;

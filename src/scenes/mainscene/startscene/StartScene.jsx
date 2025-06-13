@@ -9,6 +9,7 @@ import {
     setCurrentMiliSec
 } from '../../../redux/store/GameManager'
 import { useRef, useEffect, useState } from "react"
+import { calculateDotSpeed } from '../../../utils/Dot/dot'
 
 const StartScene = () => {
     const dispatch = useDispatch();
@@ -75,6 +76,15 @@ const StartScene = () => {
         return circles;
     }
 
+    const showBestSpeed = () => {
+        const dots = useSelector(state => state.gameManager.dots);
+        const sec = useSelector(state => state.gameManager.sec);
+        const miliSec = useSelector(state => state.gameManager.miliSec);
+
+        const speed = calculateDotSpeed(dots, sec, miliSec);
+        return `${speed} d/s`;
+    }
+
     return (
         <>
             <div className="menu-background">
@@ -82,6 +92,7 @@ const StartScene = () => {
             </div>
             <ul className="menu-components flex-collumn max-width-500" id="menu-list">
                 <GameTitle />
+                <p>Best: {showBestSpeed()}</p>
                 <Setting />
                 <li id="item-number" className="menu-item flex-row justify-content-space-between">
                     <span className="label">DOT NUMBER</span>
